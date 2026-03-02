@@ -1,10 +1,13 @@
 // ==UserScript==
 // @name         WhatsApp Web Print
+// @name:cs      WhatsApp Web Tisk
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Centered printing of images on WhatsApp Web with maximum scaling and safe margins.
+// @description  Adds a print button for opened images in WhatsApp Web.
+// @description:cs Přidává tlačítko tisku pro otevřené obrázky ve WhatsAppu.
 // @author       Michal Dobiášovký
 // @match        https://web.whatsapp.com/*
+// @license      MIT
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/michaldobiasovsky/whatsapp-web-print/main/script.user.js
 // @updateURL    https://raw.githubusercontent.com/michaldobiasovsky/whatsapp-web-print/main/script.user.js
