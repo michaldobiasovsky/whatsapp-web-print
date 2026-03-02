@@ -2,10 +2,10 @@
 // @name         WhatsApp Web Print
 // @name:cs      WhatsApp Web Tisk
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Adds a print button for opened images in WhatsApp Web.
-// @description:cs Přidává tlačítko tisku pro otevřené obrázky ve WhatsAppu.
-// @author       Michal Dobiášovký
+// @version      1.1
+// @description  Adds a print button and Ctrl+P shortcut for opened images in WhatsApp Web.
+// @description:cs Přidává tlačítko tisku a zkratku Ctrl+P pro otevřené obrázky ve WhatsAppu.
+// @author       Michal Dobiášovský
 // @match        https://web.whatsapp.com/*
 // @license      MIT
 // @grant        none
@@ -13,10 +13,10 @@
 // @updateURL    https://raw.githubusercontent.com/michaldobiasovsky/whatsapp-web-print/main/script.user.js
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    // 1. Button styling (bottom right)
+    // Floating print button styles.
     const style = document.createElement('style');
     style.innerHTML = `
         #wa-print-fab {
@@ -54,7 +54,7 @@
         const styleSheet = printWin.document.createElement('style');
         styleSheet.textContent = `
             @page {
-                margin: 0; /* Hides header and footer (URLs/titles) */
+                margin: 0;
             }
             html, body {
                 margin: 0;
@@ -74,7 +74,6 @@
                 left: 0;
             }
             img {
-                /* Proportional scaling with safe margins */
                 max-width: 90%;
                 max-height: 90%;
                 width: auto;
@@ -95,16 +94,28 @@
         container.appendChild(img);
         printWin.document.body.appendChild(container);
 
-        img.onload = function() {
+        img.onload = function () {
             printWin.focus();
             setTimeout(() => {
                 printWin.print();
                 printWin.close();
-            }, 500); // Small delay to ensure high-quality rendering
+            }, 500);
         };
     }
 
-    // Monitor for open images (using WhatsApp's internal class)
+    window.addEventListener('keydown', (e) => {
+        // Handle Ctrl+P / Cmd+P for image preview printing.
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+            const currentImg = document.querySelector('img._ao3e[src^="blob:"]');
+            // Run only when the image preview is open and visible.
+            if (currentImg && currentImg.offsetParent !== null) {
+                e.preventDefault(); // Prevent printing the full WhatsApp page.
+                e.stopImmediatePropagation();
+                printImage(currentImg.src);
+            }
+        }
+    }, true); // Use capture to intercept before app handlers.
+
     setInterval(() => {
         const currentImg = document.querySelector('img._ao3e[src^="blob:"]');
         if (currentImg && currentImg.offsetParent !== null) {
