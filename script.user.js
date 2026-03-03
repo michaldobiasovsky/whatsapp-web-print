@@ -6,6 +6,7 @@
 // @description  A tool for WhatsApp Web that enables image printing and AI-powered text recognition (OCR).
 // @description:cs Nástroj pro WhatsApp Web umožňující tisk obrázků a rozpoznávání textu (OCR) pomocí AI.
 // @author       Michal Dobiášovský
+// @license      MIT
 // @match        https://web.whatsapp.com/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_setValue
