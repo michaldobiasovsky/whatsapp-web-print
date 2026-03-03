@@ -1,4 +1,4 @@
-# WhatsApp Web Print 🖨️
+# WhatsApp Web Print
 
 A Tampermonkey userscript that adds a floating print button for opened images on WhatsApp Web.
 Designed for clean, centered, and scaled printing without messy browser headers.
