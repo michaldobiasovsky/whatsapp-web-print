@@ -23,7 +23,7 @@ Before installing the script, you need the Tampermonkey extension by Jan Biniok.
    - In the top-right corner, toggle **Developer mode** to **ON**.
 4. Permissions:
    - In the Tampermonkey extension settings, ensure **Allow access to file URLs** or **Allow User Scripts** is enabled if prompted.
-5. **Restart your browser**:
+5. ⚠️**Restart your browser**⚠️:
    - For the changes to take effect and for the script to load correctly, close and reopen Chrome entirely. 🔄
 
 ## Installation
